@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Language Selector
+GenericName=Language Selector
+Comment=Change the language of the desktop
+Exec=python /opt/LanguageSelector/language-selector.py
+Icon=language-selector
+Terminal=false
+Type=Application
+
