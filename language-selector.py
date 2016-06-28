@@ -15,7 +15,7 @@ class MainFrame(wx.Frame):
         self.GetSizer().Add(wx.StaticLine(self, -1), (2, 0), (1, 1), wx.EXPAND | wx.ALL, 2)
         self.GetSizer().Add(self.Ok, (3, 0), (1, 1), wx.ALL | wx.ALIGN_RIGHT, 5)
         self.Bind(wx.EVT_BUTTON, self.OnClick)
-        self.SetSize((self.GetEffectiveMinSize().GetWidth() * 2, self.GetEffectiveMinSize().GetHeight()))
+        self.SetSize((350, 110))
         self.GetSizer().AddGrowableCol(0)
         self.InitLanguages()
         self.Center()
