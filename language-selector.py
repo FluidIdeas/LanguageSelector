@@ -32,7 +32,7 @@ class MainFrame(wx.Frame):
                 self.LanguageSelector.Append(locale)
 
     def OnClick(self, event):
-        process = Popen(['sudo', '/opt/LanguageSelector/changelocale.sh', self.LanguageSelector.GetValue()], stdout=PIPE)
+        process = Popen(['sudo', '/opt/LanguageSelector/changelocale.sh', self.LanguageSelector.GetStringSelection()], stdout=PIPE)
         (output, err) = process.communicate()
         exit_code = process.wait()
         exit(0)
