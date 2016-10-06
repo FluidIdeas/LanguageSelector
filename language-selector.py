@@ -6,7 +6,7 @@ from subprocess import *
 class MainFrame(wx.Frame):
 
     def __init__(self):
-        wx.Frame.__init__(self, None, -1, title='Select Language', style=wx.NO_BORDER)
+        wx.Frame.__init__(self, None, -1, title='Select Language')
         self.SetSizer(wx.GridBagSizer())
         self.LanguageSelector = wx.ListBox(self, -1, size=(-1, -1))
         self.Ok = wx.Button(self, wx.ID_OK, 'Change Language')
@@ -15,11 +15,10 @@ class MainFrame(wx.Frame):
         self.GetSizer().Add(wx.StaticLine(self, -1), (2, 0), (1, 1), wx.EXPAND | wx.ALL, 2)
         self.GetSizer().Add(self.Ok, (3, 0), (1, 1), wx.ALL | wx.ALIGN_RIGHT, 5)
         self.Bind(wx.EVT_BUTTON, self.OnClick)
-        self.SetSize((500, 350))
         self.GetSizer().AddGrowableCol(0)
         self.GetSizer().AddGrowableRow(1)
         self.InitLanguages()
-        self.Maximize()
+        self.Center()
         self.Show()
 
     def InitLanguages(self):
