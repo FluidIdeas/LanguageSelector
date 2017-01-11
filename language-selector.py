@@ -10,10 +10,12 @@ class MainFrame(wx.Frame):
         self.SetSizer(wx.GridBagSizer())
         self.LanguageSelector = wx.ListBox(self, -1, size=(-1, -1))
         self.Ok = wx.Button(self, wx.ID_OK, 'Change Language')
+	self.Cancel = wx.Button(self, wx.ID_CANCEL, 'Close')
         self.GetSizer().Add(wx.StaticText(self, -1, 'Choose the language for desktop:'), (0, 0), (1, 1), wx.ALIGN_LEFT | wx.ALL, 5)
-        self.GetSizer().Add(self.LanguageSelector, (1, 0), (1, 1), wx.EXPAND | wx.ALL, 5)
-        self.GetSizer().Add(wx.StaticLine(self, -1), (2, 0), (1, 1), wx.EXPAND | wx.ALL, 2)
+        self.GetSizer().Add(self.LanguageSelector, (1, 0), (1, 2), wx.EXPAND | wx.ALL, 5)
+        self.GetSizer().Add(wx.StaticLine(self, -1), (2, 0), (1, 2), wx.EXPAND | wx.ALL, 2)
         self.GetSizer().Add(self.Ok, (3, 0), (1, 1), wx.ALL | wx.ALIGN_RIGHT, 5)
+	self.GetSizer().Add(self.Cancel, (3, 1), (1, 1), wx.ALL | wx.ALIGN_LEFT, 5)
         self.Bind(wx.EVT_BUTTON, self.OnClick)
         self.GetSizer().AddGrowableCol(0)
         self.GetSizer().AddGrowableRow(1)
@@ -31,9 +33,11 @@ class MainFrame(wx.Frame):
                 self.LanguageSelector.Append(locale)
 
     def OnClick(self, event):
-        process = Popen(['sudo', '/opt/LanguageSelector/changelocale.sh', self.LanguageSelector.GetStringSelection()], stdout=PIPE)
-        (output, err) = process.communicate()
-        exit_code = process.wait()
+	eventObject = event.GetEventObject()
+	if eventObject == self.Ok:
+	        process = Popen(['sudo', '/opt/LanguageSelector/changelocale.sh', self.LanguageSelector.GetStringSelection()], stdout=PIPE)
+        	(output, err) = process.communicate()
+		exit_code = process.wait()
         exit(0)
 
 app = wx.App()
